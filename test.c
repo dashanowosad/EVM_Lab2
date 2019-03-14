@@ -1,6 +1,12 @@
 #include "Mysimplecomputer.h"
 #include <stdio.h>
 
+#define line "q"
+#define vline "x"
+#define ula "l"
+#define ura "k"
+#define dla "m"
+#define dra "j"
 int main(){
 	int tmp, commandtest,c , o,i;
 	sc_memoryInit();
@@ -87,9 +93,153 @@ int main(){
 ////////*Visual function*//////////////////////////
 
 ///////*Memory + Visual*//////////////////////////////
+//Memory
+	mt_clrscr();
+	printf("\E(0");
+	mt_gotoXY(2,5);
+	printf(ula);
+	for (i = 0; i < cols/4; i++) printf(line);	
+	printf("\E(B");
+	printf("Memory");
+	printf("\E(0");
+	for (i = 0; i < cols/4; i++) printf(line);	
+	printf(ura);
+	
+	for (i = 0; i < rows/2; i++) {
+		mt_gotoXY(i+3,5);
+		printf(vline);	
+		mt_gotoXY(i+3,cols/2 + 12);
+		printf(vline);	
+	}
+	mt_gotoXY(i+3,5);
+	printf(dla);
+	for (i = 0; i < cols/2 + 6; i++) printf(line);
+	printf(dra);
+//Window
+	mt_gotoXY(rows/2 + 5 ,5);
+	printf(ula);
+	for (i = 0; i < cols/3; i++) printf(line);		
+	printf(ura);
+	
+	for (i = 0; i < rows/4; i++) {
+		mt_gotoXY(i+rows/2 + 6,5);
+		printf(vline);	
+		mt_gotoXY(i+rows/2 + 6,cols/3 + 6);
+		printf(vline);	
+	}
+	mt_gotoXY(i+rows/2 + 6,5);
+	printf(dla);
+	for (i = 0; i < cols/3; i++) printf(line);
+	printf(dra);
+	
 
-		
+//Accumulator	
+	mt_gotoXY(2,cols/2 + 20);
+	printf(ula);
+	for (i = 0; i < cols/16; i++) printf(line);
+	printf("\E(B");
+	printf("Accumulator");
+	printf("\E(0");
+	for (i = 0; i < cols/16; i++) printf(line);
+	printf(ura);	
+	
+	for (i = 0; i < rows/16; i++) {
+		mt_gotoXY(i+3,cols/2 + 20);
+		printf(vline);	
+		mt_gotoXY(i+3,cols/2 + 52);
+		printf(vline);	
+	}	
+	mt_gotoXY(i+3,cols/2 + 20);
+	printf(dla);
+	for (i = 0; i < cols/8 + 10; i++) printf(line);
+	printf(dra);
 
+//InstuctionCounter
+
+	mt_gotoXY(7,cols/2 + 20);
+	printf(ula);
+	for (i = 0; i < cols/16 - 3; i++) printf(line);
+	printf("\E(B");
+	printf("InstuctionCounter");
+	printf("\E(0");	
+	for (i = 0; i < cols/16 - 3; i++) printf(line);
+	printf(ura);	
+	
+	for (i = 0; i < rows/16; i++) {
+		mt_gotoXY(i+8,cols/2 + 20);
+		printf(vline);	
+		mt_gotoXY(i+8,cols/2 + 52);
+		printf(vline);	
+	}	
+	mt_gotoXY(i+8,cols/2 + 20);
+	printf(dla);
+	for (i = 0; i < cols/8 + 10; i++) printf(line);
+	printf(dra);
+
+//Operation
+	mt_gotoXY(12,cols/2 + 20);
+	printf(ula);
+	for (i = 0; i < cols/16 + 1; i++) printf(line);
+	printf("\E(B");
+	printf("Operation");
+	printf("\E(0");	
+	for (i = 0; i < cols/16 + 1; i++) printf(line);
+	printf(ura);
+
+	for (i = 0; i < rows/16; i++) {
+		mt_gotoXY(i+13,cols/2 + 20);
+		printf(vline);	
+		mt_gotoXY(i+13,cols/2 + 52);
+		printf(vline);	
+	}	
+	mt_gotoXY(i+13,cols/2 + 20);
+	printf(dla);
+	for (i = 0; i < cols/8 + 10; i++) printf(line);
+	printf(dra);
+//Flags
+	mt_gotoXY(17,cols/2 + 20);
+	printf(ula);
+	for (i = 0; i < cols/16 + 3; i++) printf(line);
+	printf("\E(B");
+	printf("Flags");
+	printf("\E(0");	
+	for (i = 0; i < cols/16 + 3; i++) printf(line);
+	printf(ura);
+
+	for (i = 0; i < rows/16; i++) {
+		mt_gotoXY(i+18,cols/2 + 20);
+		printf(vline);	
+		mt_gotoXY(i+18,cols/2 + 52);
+		printf(vline);	
+	}	
+	mt_gotoXY(i+18,cols/2 + 20);
+	printf(dla);
+	for (i = 0; i < cols/8 + 10; i++) printf(line);
+	printf(dra);
+//Keys
+	mt_gotoXY(rows/2 + 5,cols/3 + 15);
+	printf(ula);
+	for (i = 0; i < cols/22; i++) printf(line);
+	printf("\E(B");
+	printf("Keys");
+	printf("\E(0");	
+	for (i = 0; i < cols/4; i++) printf(line);
+	printf(ura);
+
+	for (i = 0; i < rows/4 + 1; i++) {
+		mt_gotoXY(i+rows/2 + 6,cols/3 + 15);
+		printf(vline);	
+		mt_gotoXY(i+rows/2 + 6,cols/3 + 69);
+		printf(vline);	
+	}	
+	mt_gotoXY(i+rows/2 + 5,cols/3 + 15);
+	printf(dla);
+	for (i = 0; i < cols/3 - 3; i++) printf(line);
+	printf(dra);
+
+	printf("\E(B");
+
+mt_gotoXY(i+rows/2 + 6,1);
 ///////*Memory + Visual*//////////////////////////////
 ////////////////////////////LAB2//////////////////////////////////
 	return 0;
