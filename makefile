@@ -10,8 +10,8 @@ all: MSC del
 MSC: test.o msc.a
 	$(CC) -o MSC test.o -L. msc.a
 
-msc.a: test.o Command.o Memory.o Register.o Visual.o
-	ar cr msc.a Command.o Memory.o Register.o Visual.o
+msc.a: test.o Command.o Memory.o Register.o Visual.o Bigchar.o
+	ar cr msc.a Command.o Memory.o Register.o Visual.o Bigchar.o
 	
 test.o: test.c
 	$(CC) $(CFLAGS) test.c
@@ -28,6 +28,8 @@ registr.o: Register.c
 visual.o: Visual.c
 	$(CC) $(CFLAGS) Visual.c
 
+bigchar.o: Bigchar.c
+	$(CC) $(CFLAGS) Bigchar.c
 clean:
 	rm -rf *.o *.a MSC
 del: 

@@ -1,12 +1,7 @@
 #include "Mysimplecomputer.h"
 #include <stdio.h>
 
-#define line "q"
-#define vline "x"
-#define ula "l"
-#define ura "k"
-#define dla "m"
-#define dra "j"
+
 int main(){
 	int tmp, commandtest,c , o,i;
 	sc_memoryInit();
@@ -55,6 +50,7 @@ int main(){
 
 //////////////////////////LAB2/////////////////////////////////////
 /////////*Names and groups*////////////////////////
+/*
 	mt_clrscr();
 	printf("\E[H\E[2J");
 
@@ -75,9 +71,12 @@ int main(){
 	printf("\E[40m"); //background color
 	printf("\E[10;1H");
 //////////*Names and groups*////////////////////////
+
 	
 /////////*Visual function*/////////////////////////
-	int rows, cols;
+/*
+	int k,rows, cols;
+	scanf("%d",&k);
 	mt_gotoXY(12,15);
 	printf("Row = 12, Col = 15 \n");
 	mt_gotoXY(13,1);
@@ -93,7 +92,9 @@ int main(){
 ////////*Visual function*//////////////////////////
 
 ///////*Memory + Visual*//////////////////////////////
+
 //Memory
+/*
 	mt_clrscr();
 	printf("\E(0");
 	mt_gotoXY(2,5);
@@ -242,5 +243,7 @@ int main(){
 mt_gotoXY(i+rows/2 + 6,1);
 ///////*Memory + Visual*//////////////////////////////
 ////////////////////////////LAB2//////////////////////////////////
+mt_clrscr();
+bc_box(1,1,40,30);
 	return 0;
 }
