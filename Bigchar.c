@@ -25,10 +25,15 @@ int bc_box (int x1, int y1, int x2, int y2){
 	mt_gotoXY(x2,y1);
 	printf(dla);
 	for (i = y1+1; i < y2; i++) printf(line);
-	/*mt_gotoXY(i+3,5);
-	printf(dla);
-	for (i = 0; i < cols/2 + 6; i++) printf(line);
-	printf(dra);*/
+	//mt_gotoXY(i+3,5);
+	printf(dra);
 	printf("\E(B");
+	return 0;
+}
+
+int bc_printbigchar (int symbol[2], int x, int y, enum colors bgcolor, enum colors fgcolor) {
+	mt_gotoXY(x, y);
+	mt_setbgcolor(bgcolor);
+	mt_setfgcolor(fgcolor);
 	return 0;
 }

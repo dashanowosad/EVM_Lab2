@@ -4,4 +4,6 @@
 MSC
 #Ignoring temporary files
 *.bin
+*.swp
+
 
