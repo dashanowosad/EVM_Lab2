@@ -2,7 +2,7 @@
 
 int bc_printA(char * str){
 	printf("\E(0");
-	printf("%s",str);
+	printf(str);
 	printf("\E(B");
 	return 0;
 }
@@ -35,5 +35,24 @@ int bc_printbigchar (int symbol[2], int x, int y, enum colors bgcolor, enum colo
 	mt_gotoXY(x, y);
 	mt_setbgcolor(bgcolor);
 	mt_setfgcolor(fgcolor);
+	int i, j, z, tmp, tmpbyte,tmpbite;
+	for(i = 0; i < 2; i++){
+		tmp = symbol[i];
+		for(j = 0; j <= 3; j++){
+			tmpbyte = tmp & 255;
+			for(z = 1; z <= 8; z++){
+				tmpbite = (tmpbyte >> z) & 0x1;
+				if(tmpbite == 0) 
+					printf(" ");
+				else
+					bc_printA(ACS_CKBOARD);
+			}
+			tmp = tmp >> 8;
+			mt_gotoXY(++x, y);
+		}
+	}
+	int t,s;
+	mt_getscreensize(&t,&s);
+	mt_gotoXY(t,3);
 	return 0;
 }
