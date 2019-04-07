@@ -245,7 +245,7 @@ mt_gotoXY(i+rows/2 + 6,1);
 ////////////////////////////LAB2//////////////////////////////////
 mt_clrscr();
 int A[2] = {10,10};
-bc_box(1,1,20,20);
+//bc_box(1,1,20,20);
 bc_printbigchar(A, 10, 10, White, Dark);
 	return 0;
 }
