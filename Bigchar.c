@@ -34,18 +34,19 @@ int bc_box (int x1, int y1, int x2, int y2){
 int bc_printbigchar (int symbol[2], int x, int y, enum colors bgcolor, enum colors fgcolor) {
 	mt_gotoXY(x, y);
 	mt_setbgcolor(bgcolor);
-	mt_setfgcolor(fgcolor);
 	int i, j, z, tmp, tmpbyte,tmpbite;
 	for(i = 0; i < 2; i++){
 		tmp = symbol[i];
 		for(j = 0; j <= 3; j++){
 			tmpbyte = tmp & 255;
-			for(z = 1; z <= 8; z++){
-				tmpbite = (tmpbyte >> z) & 0x1;
-				if(tmpbite == 0) 
-					printf(" ");
+			for(z = 0; z <= 7; z++){
+				tmpbite = (tmpbyte >> (7-z)) & 0x1;
+				if(tmpbite){
+					mt_setfgcolor(fgcolor);
+					bc_printA(ACS_CKBOARD);					
+				}
 				else
-					bc_printA(ACS_CKBOARD);
+					printf(" ");
 			}
 			tmp = tmp >> 8;
 			mt_gotoXY(++x, y);
