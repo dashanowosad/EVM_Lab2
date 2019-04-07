@@ -2,11 +2,16 @@
 #define _CONST_
 
 #define N 100
+#define ACS_CKBOARD "a"
 #define line "q"
 #define vline "x"
 #define ula "l"
 #define ura "k"
 #define dla "m"
 #define dra "j"
-enum colors {Dark, Red, Green, Yellow, Dark_Blue, Purple, Blue, White, Standart};
+enum colors {
+	Dark, Red, Green,
+	Yellow, Dark_Blue, Purple,
+	Blue, White, Standart
+};
 #endif //_CONST_
