@@ -57,3 +57,26 @@ int bc_printbigchar (int symbol[2], int x, int y, enum colors bgcolor, enum colo
 	mt_gotoXY(t,3);
 	return 0;
 }
+
+int bc_setbigcharpos (int * big, int x, int y, int value){
+	if((x >= 0) && (7 >= x)){
+		if(value == 1){
+			big[x / 4] = big[x / 4] | ((1 << (x * 8 + y)));
+			//printf("%d",big[x / 4]);
+		}else{
+			big[x / 4] = big[x / 4] & (~(1 << (x * 8 + y)));
+			//printf("%d",big[x / 4]);
+		}return 0;
+	}else
+		return -1;
+
+}
+
+int bc_getbigcharpos (int * big, int x, int y, int * value){
+        if((x >= 0) && (7 >= x)){
+                *value = (big [x / 4] >> (x * 8 + y)) & 0x1;
+		return 0;
+        }else
+                return -1;
+}
+
