@@ -1,9 +1,9 @@
 #Ignoring .a and .o files
 *.[ao]
-#Ignoring  MSC 
-MSC
+#Ignoring  test
+test
 #Ignoring temporary files
 *.bin
-*.swp
+
 
 
