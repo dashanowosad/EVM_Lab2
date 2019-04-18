@@ -5,10 +5,10 @@ CFLAGS=-c -Wall
 
 .PHONY: clean
 
-all: MSC del
+all: test del
 
-MSC: test.o msc.a
-	$(CC) -o MSC test.o -L. msc.a
+test: test.o msc.a
+	$(CC) -o test  test.o -L. msc.a
 
 msc.a: test.o Command.o Memory.o Register.o Visual.o Bigchar.o
 	ar cr msc.a Command.o Memory.o Register.o Visual.o Bigchar.o
@@ -31,6 +31,6 @@ visual.o: Visual.c
 bigchar.o: Bigchar.c
 	$(CC) $(CFLAGS) Bigchar.c
 clean:
-	rm -rf *.o *.a MSC
+	rm -rf *.o *.a test
 del: 
 	rm -rf *.o
