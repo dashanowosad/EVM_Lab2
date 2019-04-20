@@ -5,32 +5,46 @@ CFLAGS=-c -Wall
 
 .PHONY: clean
 
-all: test del
+all: test.exe del
 
-test: test.o msc.a
-	$(CC) -o test  test.o -L. msc.a
+test.exe : main.o MSC/msc.a Bigchar/bc.a
+	$(CC) -o test.exe  main.o -L. MSC/msc.a Bigchar/bc.a
 
-msc.a: test.o Command.o Memory.o Register.o Visual.o Bigchar.o
-	ar cr msc.a Command.o Memory.o Register.o Visual.o Bigchar.o
-	
-test.o: test.c
-	$(CC) $(CFLAGS) test.c
+MSC/msc.a:  MSC/Command.o MSC/Memory.o MSC/Register.o 
+	ar cr MSC/msc.a MSC/Command.o MSC/Memory.o MSC/Register.o 
 
-command.o: Command.c
-	$(CC) $(CFLAGS) Command.c
+Bigchar/bc.a: Bigchar/Bigchar.o Visual/Visual.o
+	ar cr Bigchar/bc.a Bigchar/Bigchar.o Visual/Visual.o
 
-memory.o: Memory.c
-	$(CC) $(CFLAGS) Memory.c
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
 
-registr.o: Register.c
-	$(CC) $(CFLAGS) Register.c
+MSC/command.o: MSC/Command.c
+	$(CC) $(CFLAGS) MSC/Command.c
 
-visual.o: Visual.c
-	$(CC) $(CFLAGS) Visual.c
+MSC/memory.o: MSC/Memory.c
+	$(CC) $(CFLAGS) MSC/Memory.c
 
-bigchar.o: Bigchar.c
-	$(CC) $(CFLAGS) Bigchar.c
+MSC/registr.o: MSC/Register.c
+	$(CC) $(CFLAGS) MSC/Register.c
+
+Visual/visual.o: Visual/Visual.c
+	$(CC) $(CFLAGS) Visual/Visual.c
+
+Bigchar/bigchar.o: Bigchar/Bigchar.c
+	$(CC) $(CFLAGS) Bigchar/Bigchar.c
+
+
+
+
 clean:
-	rm -rf *.o *.a test
-del: 
+	cd MSC/ && rm -rf *.o *.a
+	cd Visual/ && rm -rf *.o
+	cd Bigchar/ && rm -rf *.o *.a
+	rm -rf *.o  *.exe
+del:  
+	cd MSC/ && rm -rf *.o 
+	cd Visual/ && rm -rf *.o
+	cd Bigchar/ && rm -rf *.o 
 	rm -rf *.o
+
