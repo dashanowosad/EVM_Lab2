@@ -1,7 +1,9 @@
 #Ignoring .a and .o files
-*.[ao]
-#Ignoring  test
-test
+MSC/*.[ao]
+Visual/*.o
+Bigchar/*.[ao]
+#Ignoring .exe files
+*.exe
 #Ignoring temporary files
 *.bin
 
