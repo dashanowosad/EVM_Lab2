@@ -1,23 +1,41 @@
 #include "Mysimplecomputer.h"
+
 #include "Visual/Visual.h"
 #include "Bigchar/Bigchar.h"
 #include <stdio.h>
 
 int main(){
-	int tmp, commandtest,c , o,i;
-	sc_memoryInit();
+	int tmp, commandtest,c , o,i, j, z=0;
+	 int A[2] = {0x3033F00, 0x3F30303F}, u;
+	/*sc_memoryInit();
 	sc_regInit();
 	printf("Setting cell 30 value 45\n");
 	sc_memorySet(30, 45);
 	printf("Getting cell value 30 \n");
 	sc_memoryGet(30, &tmp);
-	printf("%d ", tmp);
-	printf("\n Filling memory with an increasing sequence and writing to a file \n");
-	for(i = 0; i < N; i++){
-		sc_memorySet(i, i);
-		sc_memoryGet(i, &tmp);
-		printf("%d ", tmp);
+	printf("%d ", tmp);*/
+//	printf("\n Filling memory with an increasing sequence and writing to a file \n");
+	mt_clrscr();
+//	mt_gotoXY(2,2);
+	for(i = 0; i < 10; i++){
+		for(j = 0; j < 10;j++){
+			sc_memorySet(i, z);
+			sc_memoryGet(i, &tmp);
+			printf("%4d ", tmp);
+			z++;
+		}
+		printf("\n");
 	}
+	bc_box(1,1,11,51);
+	mt_gotoXY(1,23);
+	printf("Memory");
+	bc_box(12,1,21,47);
+	bc_printbigchar(A,13,2,0,7);
+	bc_printbigchar(A,13,11,0,7);
+	bc_printbigchar(A,13,20,0,7);
+	bc_printbigchar(A,13,29,0,7);
+	bc_printbigchar(A,13,38,0,7);
+	/*
 	sc_memorySave("Files/swap.bin");
 	printf("\n Reinitialize RAM and read it from file \n");
 	sc_memoryInit();
@@ -51,7 +69,6 @@ int main(){
 	
 
 	mt_clrscr();
-	int A[2] = {0x3033F00, 0x3F30303F}, u;
 	bc_box(1,1,20,20);
 	bc_printbigchar(A, 2, 25, 0, 7);
 	bc_setbigcharpos(A, 0, 0, 0);
@@ -59,5 +76,7 @@ int main(){
 	bc_getbigcharpos(A, 4, 0, &u);
 	printf("%d",u);
 	mt_setbgcolor(10);
+*/
 return 0;
 }
+

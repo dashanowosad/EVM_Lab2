@@ -16,10 +16,10 @@ int bc_box (int x1, int y1, int x2, int y2){
 	for (i = y1+1; i < y2; i++) printf(line);	
 	//printf("Memory");	
 	printf(ura);
-	for (i = y1+1; i < y2; i++) {	
+	for (i = x1+1; i < x2; i++) {	
 		mt_gotoXY(i,y2);	
 		printf(vline);
-		mt_gotoXY(i,x1);
+		mt_gotoXY(i,y1);
 		printf(vline);
 	}
 	mt_gotoXY(x2,y1);
