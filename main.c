@@ -6,7 +6,7 @@
 
 void UI(void){
 	int tmp, i, j, z = 3, y = 2, c = 0;
-	char s[5];
+	char s[6];
 	int A[2] = {0x0, 0x0};
 	mt_clrscr();
 	mt_gotoXY(2, 2);

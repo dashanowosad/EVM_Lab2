@@ -5,7 +5,7 @@ CFLAGS=-c -Wall
 
 .PHONY: clean
 
-all: test.exe del
+all: test.exe
 
 test.exe : main.o MSC/msc.a Bigchar/bc.a
 	$(CC) -o test.exe  main.o -L. MSC/msc.a Bigchar/bc.a

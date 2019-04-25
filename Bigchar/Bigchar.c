@@ -13,8 +13,8 @@ int  bc_initbigchar(char s, int *A){
                         break;
                 }
 		case '0': {
-                        A[0] =0x818181FF;
-                        A[1] =0xFF818181;
+                        A[0] =0xC3C3C3FF;
+                        A[1] =0xFFC3C3C3;
                         break;
                 }
 		case '1': {
@@ -102,7 +102,7 @@ int  bc_initbigchar(char s, int *A){
 
 int bc_printA(char * str){
 	printf(S_tab);
-	printf(str);
+	printf("%s", str);
 	printf(F_tab);
 	return 0;
 }
