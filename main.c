@@ -3,39 +3,49 @@
 #include "Visual/Visual.h"
 #include "Bigchar/Bigchar.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+/*void UI(void){
+char s[5];
+int tmp;
+itoa(tmp,s,16);
+}*/
+
 
 int main(){
-	int tmp, i, j, z;
+	int tmp, i, j, z, y = 2;
+	char s[5];
 	int A[2] = {0xFFC3C3FF, 0xFF030303};
 	mt_clrscr();
 	z = 3;
 	mt_gotoXY(2, 2);
 	for(i = 0; i < 10; i++){
 		for(j = 0; j < 10;j++){
-			sc_memorySet(i, 9999);
+			sc_memorySet(i,4660);
 			sc_memoryGet(i, &tmp);
-			printf("%4d ", tmp);
+			sprintf(s,"+%04x",tmp);
+			printf("%s ",s);
 		}
 		mt_gotoXY(z, 2);
 		z++;
 	}
-	bc_box(1, 1, 11, 51);
-	mt_gotoXY(1, 23);
+	bc_box(1, 1, 11, 61);
+	mt_gotoXY(1, 29);
 	printf("Memory");
 	bc_box(12, 1, 21, 46);
-	bc_box(1, 52, 3, 72);
-	mt_gotoXY(1, 57);
+	bc_box(1, 62, 3, 82);
+	mt_gotoXY(1, 67);
 	printf("Accumulator");
-	bc_box(4, 52, 6, 72);
-	mt_gotoXY(4, 54);
+	bc_box(4, 62, 6, 82);
+	mt_gotoXY(4, 64);
         printf("InstructionCounter");
-	bc_box(7, 52, 9, 72);
-	mt_gotoXY(7, 58);
+	bc_box(7, 62, 9, 82);
+	mt_gotoXY(7, 68);
         printf("Operation");
-	bc_box(10, 52, 12, 72);
-	mt_gotoXY(10, 60);
+	bc_box(10, 62, 12, 82);
+	mt_gotoXY(10, 70);
         printf("Flags");
-	bc_box(13, 47, 21, 72);
+	bc_box(13, 47, 21, 82);
 	mt_gotoXY(13, 48);
         printf("Keys:");
 	mt_gotoXY(14, 48);
@@ -52,12 +62,14 @@ int main(){
 	printf("F5 - accumulator");
 	mt_gotoXY(20, 48);
 	printf("F6 - instructionCounter");
-	bc_printbigchar(A, 13, 2, 0, 7);
-        bc_printbigchar(A, 13, 11, 0, 7);
-        bc_printbigchar(A, 13, 20, 0, 7);
-        bc_printbigchar(A, 13, 29, 0, 7);
-        bc_printbigchar(A, 13, 38, 0, 7);
+	
+	for (i = 0; i < 5; i++){
+		bc_initbigchar(s[i],A);
+		bc_printbigchar(A, 13, y, 0, 7);
+		y += 9;
+	}
 	mt_gotoXY(22, 1);
+
 return 0;
 }
 

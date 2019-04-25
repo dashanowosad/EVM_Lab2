@@ -1,5 +1,106 @@
 #include "Bigchar.h"
 
+int  bc_initbigchar(char s, int *A){
+	switch(s){
+		case '+': {
+			A[0] = 0xFF181818;
+			A[1] = 0x181818FF;
+			break;
+		}
+		case '-': {
+                        A[0] = 0xFF000000;
+                        A[1] = 0xFF;
+                        break;
+                }
+		case '0': {
+                        A[0] =0x818181FF;
+                        A[1] =0xFF818181;
+                        break;
+                }
+		case '1': {
+                        A[0] =0x303030F;
+                        A[1] =0x3030303;
+                        break;
+                }
+		case '2': {
+                        A[0] =0xFF0303FF;
+                        A[1] =0xFFC0C0C0;
+                        break;
+                }
+		case '3': {
+                        A[0] =0xFF0303FF;
+                        A[1] =0xFF030303;
+                        break;
+                }
+		case '4': {
+                        A[0] =0xC3C3C300; 
+                        A[1] =0x30303FF;
+                        break;
+                }
+		case '5': {
+                        A[0] =0xFFC0C0FF;
+                        A[1] =0xFF030303;
+                        break;
+                }
+		case '6': {
+                        A[0] =0xFFC0C0FF;
+                        A[1] =0xFFC3C3C3;
+                        break;
+                }
+		case '7': {
+                        A[0] =0x303C3FF;
+                        A[1] =0x3030303;
+                        break;
+                }
+		case '8': {
+                        A[0] =0xFFC3C3FF;
+                        A[1] =0xFFC3C3C3;
+                        break;
+                }
+		case '9': {
+                        A[0] =0xFFC3C3FF;
+                        A[1] =0xFF030303;
+                        break;
+              	}
+/*		case 'A': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+		case 'B': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+		case 'C': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+		case 'D': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+		case 'E': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+		case 'F': {
+                        A[0] =
+                        A[1] =
+                        break;
+                }
+*/
+		default:{
+			return -1;
+		}
+
+	}
+return 0;
+}
+
 int bc_printA(char * str){
 	printf("\E(0");
 	printf(str);
