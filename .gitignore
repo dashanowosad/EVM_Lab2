@@ -1,11 +1,11 @@
 #Ignoring .a and .o files
 MSC/*.[ao]
 Visual/*.o
-Bigchar/*.[ao]
+Bigchar/*.[aobin]
+
 #Ignoring .exe files
 *.exe
-#Ignoring temporary files
-*.bin
+
 
 
 
