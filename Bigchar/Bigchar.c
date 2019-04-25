@@ -62,60 +62,58 @@ int  bc_initbigchar(char s, int *A){
                         A[1] =0xFF030303;
                         break;
               	}
-/*		case 'A': {
-                        A[0] =
-                        A[1] =
+		case 'a': {
+                        A[0] =0xC3C3C3FF;
+                        A[1] =0xC3C3C3FF;
                         break;
                 }
-		case 'B': {
-                        A[0] =
-                        A[1] =
+		case 'b': {
+                        A[0] =0xFEC3C3FE;	
+                        A[1] =0xFEC3C3C3;
                         break;
                 }
-		case 'C': {
-                        A[0] =
-                        A[1] =
+		case 'c': {
+                        A[0] =0xC0C0C0FF;
+                        A[1] =0xFFC0C0C0;
                         break;
                 }
-		case 'D': {
-                        A[0] =
-                        A[1] =
+		case 'd': {
+                        A[0] =0xC3C3C3FE;
+                        A[1] =0xFEC3C3C3;
                         break;
                 }
-		case 'E': {
-                        A[0] =
-                        A[1] =
+		case 'e': {
+                        A[0] =0xFFC0C0FF;
+                        A[1] =0xFFC0C0C0;
                         break;
                 }
-		case 'F': {
-                        A[0] =
-                        A[1] =
+		case 'f': {
+                        A[0] =0xFFC0C0FF;
+                        A[1] =0xC0C0C0C0;
                         break;
                 }
-*/
 		default:{
 			return -1;
 		}
 
 	}
-return 0;
+	return 0;
 }
 
 int bc_printA(char * str){
-	printf("\E(0");
+	printf(S_tab);
 	printf(str);
-	printf("\E(B");
+	printf(F_tab);
 	return 0;
 }
 
 
 int bc_box (int x1, int y1, int x2, int y2){
 	int i;
-	printf("\E(0");
+	printf(S_tab);
 	mt_gotoXY(x1,y1);
 	printf(ula);
-	for (i = y1+1; i < y2; i++) printf(line);	
-	//printf("Memory");	
+	for (i = y1+1; i < y2; i++) printf(line);
 	printf(ura);
 	for (i = x1+1; i < x2; i++) {	
 		mt_gotoXY(i,y2);	
@@ -126,9 +124,8 @@ int bc_box (int x1, int y1, int x2, int y2){
 	mt_gotoXY(x2,y1);
 	printf(dla);
 	for (i = y1+1; i < y2; i++) printf(line);
-	//mt_gotoXY(i+3,5);
 	printf(dra);
-	printf("\E(B");
+	printf(F_tab);
 	return 0;
 }
 
@@ -163,10 +160,8 @@ int bc_setbigcharpos (int * big, int x, int y, int value){
 	if((x >= 0) && (7 >= x)){
 		if(value == 1){
 			big[x / 4] = big[x / 4] | ((1 << (x * 8 + y)));
-			//printf("%d",big[x / 4]);
 		}else{
 			big[x / 4] = big[x / 4] & (~(1 << (x * 8 + y)));
-			//printf("%d",big[x / 4]);
 		}return 0;
 	}else
 		return -1;
