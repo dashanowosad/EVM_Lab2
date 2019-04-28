@@ -2,7 +2,7 @@
 MSC/*.[ao]
 Visual/*.o
 Bigchar/*.[aobin]
-
+*.o
 #Ignoring .exe files
 *.exe
 
