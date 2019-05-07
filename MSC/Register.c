@@ -1,4 +1,4 @@
-#include "../Mysimplecomputer.h"
+#include "Mysimplecomputer.h"
 
 int F_reg;
 

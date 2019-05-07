@@ -1,4 +1,4 @@
-#include "Mysimplecomputer.h"
+#include "MSC/Mysimplecomputer.h"
 #include "Visual/Visual.h"
 #include "Bigchar/Bigchar.h"
 
@@ -11,14 +11,16 @@ void UI(void){
 	mt_clrscr();
 	mt_gotoXY(2, 2);
 	sc_memoryLoad(swap);
-	sc_memorySet(0,0x80FF);
+	sc_memorySet(0,0x40FF);
 	for(i = 0; i < 10; i++){
 		for(j = 0; j < 10;j++){
 			sc_memoryGet(c, &tmp);
-			if(tmp >> 14 == 0)
+			if(((tmp >> 14) & 0x1) == 0)
 				sprintf(s, "+%04x", tmp);
-			else
+			else{
+				tmp = tmp & 0xFF;
 				sprintf(s, "-%04x", tmp);
+			}
 			printf("%s ",s);
 			c++;
 		}
@@ -62,11 +64,12 @@ void UI(void){
 	printf("F6 - instructionCounter");
 	
 	sc_memoryGet(0, &tmp);
-	if(tmp >> 14 == 0)
+	if(((tmp >> 14) & 0x1) == 0)
 		sprintf(s, "+%04x", tmp);
-        else
+        else{
+		tmp = tmp & 0xFF;
                 sprintf(s, "-%04x", tmp);
-
+	}
 	for (i = 0; i < 5; i++){
 		bc_initbigchar(s[i],A);
 		bc_printbigchar(A, 14, y, 0, 7);

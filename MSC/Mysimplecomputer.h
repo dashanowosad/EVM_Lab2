@@ -1,9 +1,9 @@
 #ifndef _MYSIMPLECOMPUTER_
 #define _MYSIMPLECOMPUTER_
 
-#include "Const.h"
-#include "MSC/Flagmask.h"
-#include "MSC/Commands.h"
+#include "../Const.h"
+#include "Flagmask.h"
+#include "Commands.h"
 
 
 extern int F_reg;

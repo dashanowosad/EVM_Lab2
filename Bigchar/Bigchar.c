@@ -1,5 +1,12 @@
 #include "Bigchar.h"
 
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <fcntl.h> 
+
 int  bc_initbigchar(char s, int *A){
 	switch(s){
 		case '+': {
@@ -176,3 +183,20 @@ int bc_getbigcharpos (int * big, int x, int y, int * value){
                 return -1;
 }
 
+int bc_bigcharwrite(int fd, int *big, int count) {
+	if (fd != -1) {
+		if (BC_SIZE == 0 || BC_SIZE < 0) BC_SIZE = 2;
+		if (write(fd, big, count * BC_SIZE) == count * BC_SIZE) return 0;
+		return -1;
+	}
+	return -1;
+}
+
+int bc_bigcharread(int fd, int *big, int need_count, int *count) {
+	if (fd != -1) {
+		if (BC_SIZE == 0 || BC_SIZE < 0) BC_SIZE = 2;
+		*count = read(fd, big, need_count * BC_SIZE);
+		return 0;
+	}
+	return -1;
+}

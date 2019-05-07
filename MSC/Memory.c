@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../Mysimplecomputer.h"
+#include "Mysimplecomputer.h"
 
 int mass[N];
 int i;
