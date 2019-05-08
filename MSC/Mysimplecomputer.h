@@ -7,6 +7,8 @@
 
 
 extern int F_reg;
+int AC = 0;
+int CR = 0;
 extern int mass[N];
 extern int rows;
 extern int cols;

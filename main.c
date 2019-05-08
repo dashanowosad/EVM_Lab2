@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+extern int AC;
+extern int CF;
+
 void UI(void){
 	int tmp, i, j, z = 3, y = 2, c = 0;
 	char s[6];
@@ -35,16 +38,32 @@ void UI(void){
 
 	for(i = 1; i < 11;i+=3)
 		bc_box(i, 62, i+2, 82);
-
 	mt_gotoXY(1, 67);
 	printf("Accumulator");
+	mt_gotoXY(2, 70);
+	tmp = AC;
+        if(((tmp >> 14) & 0x1) == 0)
+		sprintf(s, "+%04x", tmp);
+		else{
+			tmp = tmp & 0xFF;
+			sprintf(s, "-%04x", tmp);
+                }
+        printf("%s ",s);
 	mt_gotoXY(4, 64);
         printf("InstructionCounter");
+	mt_gotoXY(5,70);
+	tmp = CR;
+        if(((tmp >> 14) & 0x1) == 0)
+                sprintf(s, "+%04x", tmp);
+        printf("%s ",s);
 	mt_gotoXY(7, 68);
         printf("Operation");
+	mt_gotoXY(8, 68);
+	printf("+ 00 : 00");
 	mt_gotoXY(10, 70);
         printf("Flags");
-			
+	mt_gotoXY(11, 68 );
+	printf(" O E V M");			
 	bc_box(13, 47, 22, 82);
 	mt_gotoXY(13, 48);
         printf("Keys:");
