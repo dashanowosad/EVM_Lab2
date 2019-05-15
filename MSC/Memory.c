@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include "Mysimplecomputer.h"
 
-int mass[N];
 int i;
 
-int sc_memoryInit(){
-    for(i = 0;i < N; i++)
+int sc_memoryInit() {
+    for(i = 0; i < N; i++)
 		mass[i] = 0;
     return 0;
 }
 
-int sc_memorySet(int adress, int value){
-    if((adress < 0 ) || (adress > N)){
-		sc_regSet(AOF,1);
-		return AOF; 
+int sc_memorySet(int adress, int value) {
+    if((adress < 0 ) || (adress > N)) {
+		sc_regSet(M, 1);
+		return -1; 
     }
     else {
 		mass[adress] = value;
@@ -21,10 +20,10 @@ int sc_memorySet(int adress, int value){
     }
 }
 
-int sc_memoryGet(int adress, int* value){
-    if ((adress < 0 ) || (adress > N)){
-		sc_regSet(AOF,1);
-		return AOF; 
+int sc_memoryGet(int adress, int *value) {
+    if ((adress < 0 ) || (adress > N)) {
+		sc_regSet(M, 1);
+		return -1; 
     }
     else {
 		*value = mass[adress];
@@ -32,16 +31,14 @@ int sc_memoryGet(int adress, int* value){
     }
 }
 
-int sc_memorySave(char* filename){
+int sc_memorySave(char *filename) {
     FILE *file = fopen(filename, "wb");
 	if (file) {
 		fwrite(mass, sizeof(int), N, file);
 		fclose(file);
 		return 0;
-	}else{
-		sc_regSet(EWF,1);
-		return EWF;
-	}
+	}else
+		return -1;
 }
 
 int sc_memoryLoad(char *filename) {
@@ -50,8 +47,6 @@ int sc_memoryLoad(char *filename) {
 		fread(mass, sizeof(int), N, file);
 		fclose(file);
 		return 0;
-	}else{
-		sc_regSet(ERF,1);
-		return ERF;
-	}
+	}else
+		return -1;
 }

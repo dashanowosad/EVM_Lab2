@@ -1,6 +1,6 @@
 #include "Mysimplecomputer.h"
 
-int checkCommand(int command){
+int checkCommand(int command) {
 	if( 
 		command == READ   ||	command == WRITE  ||
 		command == LOAD   ||	command == STORE  ||
@@ -23,35 +23,35 @@ int checkCommand(int command){
 	)
 		return 0;
 	else {
-		sc_regSet(WC,1);
-		return WC;
+		sc_regSet(E, 1);
+		return -1;
         }
 }
-int sc_commandEncode(int command, int operand, int * value){
-	if(operand < 128){
-		if (!checkCommand(command)){
+
+int sc_commandEncode(int command, int operand, int *value){
+	if(operand < 128) {
+		if (!checkCommand(command)) {
 		*(value) = *(value) & 0x0;
 		*(value) = *(value) | command;
 		*(value) = *(value) << 7;
 		*(value) = *(value) | operand;
 		return 0;
-}
+		}
 	else
 		return 1;
 	}
-	sc_regSet(WO,1);
-	return WO;
+	return -1;
 }
-int sc_commandDecode(int value, int * command, int * operand){
-	if(value >> 14 == 0){
+
+int sc_commandDecode(int value, int *command, int *operand) {
+	if(value >> 14 == 0) {
 		*(operand) = value & 0x7F;
 		value = value >> 7;
 		*(command) = value & 0x7F;
-		if (!checkCommand(*command)){
+		if (!checkCommand(*command)) {
 			return 0;			
 		}	
 		return 1;
 	}
-	sc_regSet(WC, 1);
-	return WC;
+	return -1;
 }

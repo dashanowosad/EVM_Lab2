@@ -4,8 +4,6 @@
 
 #include <stdio.h>
 
-extern int AC;
-extern int CF;
 
 void UI(void){
 	int tmp, i, j, z = 3, y = 2, c = 0;
