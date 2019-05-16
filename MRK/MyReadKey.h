@@ -4,12 +4,13 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
+#include <string.h>
 
 struct termios savetty;
 struct termios tty;
 
 
-enum keys {l, s, r, t, i, F5, F6};
+enum keys {l, s, r, t, i, F5, F6, UP, DOWN, LEFT, RIGHT, ENTER, NONE};
 
 
 int rk_readkey(enum keys *);

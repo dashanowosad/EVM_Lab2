@@ -98,7 +98,17 @@ void UI(void){
 
 
 int main(){
-	UI();
+//	UI();
+	char c[5];
+	c[4] = 0;
+	enum keys key;
+	rk_mytermsave();
+	rk_mytermregime(0, 1, 1, 0, 0);
+//	read(0, &c, 4);
+//	printf("Input = %s\n\n",c);
+//	fflush(stdou:t);
+	rk_readkey(&key);
+	rk_mytermrestore();
 	return 0;
 }
 
