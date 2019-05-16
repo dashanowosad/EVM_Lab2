@@ -1,6 +1,7 @@
 #include "MSC/Mysimplecomputer.h"
 #include "Visual/Visual.h"
 #include "Bigchar/Bigchar.h"
+#include "MRK/MyReadKey.h"
 
 #include <stdio.h>
 

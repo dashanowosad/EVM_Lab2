@@ -3,6 +3,7 @@ MSC/*.[ao]
 Visual/*.o
 Bigchar/*.[aobin]
 *.o
+MRK/*[ao]
 #Ignoring .exe files
 *.exe
 
