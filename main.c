@@ -96,19 +96,40 @@ void UI(void){
 	mt_gotoXY(25, 1);
 }
 
+void console(void){
+	char c[5];
+        c[4] = 0;
+        enum keys key;
+        rk_mytermsave();
+        rk_mytermregime(0, 1, 1, 0, 0);
+        rk_readkey(&key);
+
+	switch(key){
+		case F5: {
+			rk_mytermrestore();
+			mt_gotoXY(25,1);
+			scanf("%d",AC);
+			rk_mytermregime(0, 1, 1, 0, 0);
+			break;
+		}
+		case F6: {
+                        rk_mytermrestore();
+                        mt_gotoXY(25,1);
+                        scanf("%d",CR);
+                        rk_mytermregime(0, 1, 1, 0, 0);
+                        break;
+                }
+
+	}
+        rk_mytermrestore();
+
+
+}
 
 int main(){
-//	UI();
-	char c[5];
-	c[4] = 0;
-	enum keys key;
-	rk_mytermsave();
-	rk_mytermregime(0, 1, 1, 0, 0);
-//	read(0, &c, 4);
-//	printf("Input = %s\n\n",c);
-//	fflush(stdou:t);
-	rk_readkey(&key);
-	rk_mytermrestore();
+	UI();
+	console();
+	UI();
 	return 0;
 }
 

@@ -5,7 +5,8 @@
 #include <termios.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <unistd.h>
+#include "../Visual/Visual.h"
 struct termios savetty;
 struct termios tty;
 
