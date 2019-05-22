@@ -56,10 +56,14 @@ int rk_readkey (enum keys *key){
 	                *key = t;
 		else if (strncmp(buf, "i", 1) == 0)
 	                *key = i;
+		if (strncmp(buf, "w", 1) == 0)
+                        *key = w;
 		else if (strcmp(buf, "\E[15") == 0)
         	        *key = F5;
 		else if (strcmp(buf, "\E[17") == 0)
         	        *key = F6;
+		else if (strcmp(buf, "q") == 0)
+                        *key = q;
 		else if (strcmp(buf, "\E[D") == 0)
 	                *key = LEFT;
 		else if (strcmp(buf, "\E[C") == 0)

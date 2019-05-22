@@ -3,6 +3,9 @@
 
 #define swap "Files/swap.bin"
 
+#define inv "\E[?25l"
+#define vis "\E[?12;25h"
+
 #define N 100
 
 #define S_tab "\E(0"

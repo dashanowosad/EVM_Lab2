@@ -11,7 +11,7 @@ struct termios savetty;
 struct termios tty;
 
 
-enum keys {l, s, r, t, i, F5, F6, UP, DOWN, LEFT, RIGHT, ENTER, NONE};
+enum keys {l, s, r, t, w , i, F5, F6, UP, DOWN, LEFT, RIGHT, ENTER, NONE, q};
 
 
 int rk_readkey(enum keys *);
