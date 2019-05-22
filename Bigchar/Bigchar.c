@@ -40,7 +40,7 @@ int  bc_initbigchar(char s, int *A){
                         break;
                 }
 		case '4': {
-                        A[0] =0xC3C3C300; 
+                        A[0] =0xC3C3C3C3; 
                         A[1] =0x30303FF;
                         break;
                 }
