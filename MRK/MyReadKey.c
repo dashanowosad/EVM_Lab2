@@ -40,7 +40,11 @@ int rk_mytermregime (int regime, int vtime, int vmin, int echo, int sigint){
 int rk_readkey (enum keys *key){
 	char buf[5];
 	int b;
+	printf(F_tab);
+	fflush(stdout);
 	b = read(0, &buf, 4);
+	mt_gotoXY(27,1);
+	fflush(stdout);
 	if(b == -1) 
 		return -1;
 	else{
@@ -56,25 +60,25 @@ int rk_readkey (enum keys *key){
 	                *key = t;
 		else if (strncmp(buf, "i", 1) == 0)
 	                *key = i;
-		if (strncmp(buf, "w", 1) == 0)
+	 	else if (strncmp(buf, "w", 1) == 0)
                         *key = w;
 		else if (strcmp(buf, "\E[15") == 0)
         	        *key = F5;
 		else if (strcmp(buf, "\E[17") == 0)
         	        *key = F6;
-		else if (strcmp(buf, "q") == 0)
+		else if (strncmp(buf, "q", 1) == 0)
                         *key = q;
-		else if (strcmp(buf, "\E[D") == 0)
+		else if (strncmp(buf, "\E[D", 3) == 0)
 	                *key = LEFT;
-		else if (strcmp(buf, "\E[C") == 0)
+		else if (strncmp(buf, "\E[C", 3) == 0)
         	        *key = RIGHT;
-		else if (strcmp(buf, "\E[A") == 0)
+		else if (strncmp(buf, "\E[A", 3) == 0)
         	        *key = UP;
-		else if (strcmp(buf, "\E[B") == 0)
+		else if (strncmp(buf, "\E[B", 3) == 0)
 	                *key = DOWN;
 		else if (strcmp(buf, "\n") == 0)
         	        *key = ENTER;
-		else 
+		else
         	        *key = NONE;
 		return 0;
 	}	
