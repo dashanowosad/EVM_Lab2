@@ -9,8 +9,9 @@
 #include <sys/time.h>
 
 
-void timer(){
-	CR++;
+int timer(){
+	if(CU()==-1)
+	return -1;	
 }
 
 void UI(void){
@@ -22,7 +23,7 @@ void UI(void){
 	for(i = 0; i < 10; i++){
 		for(j = 0; j < 10;j++){
 			sc_memoryGet(c, &tmp);
-			if(((tmp >> 14) & 0x1) == 0)
+			if(((tmp >> 15) & 0x1) == 0)
 				sprintf(s, "+%04x", tmp);
 			else{
 				tmp = tmp & 0x7FFF;
@@ -46,10 +47,10 @@ void UI(void){
 	printf("Accumulator");
 	mt_gotoXY(2, 70);
 	tmp = AC;
-        if(((tmp >> 14) & 0x1) == 0)
+        if(((tmp >> 15) & 0x1) == 0)
 		sprintf(s, "+%04x", tmp);
 		else{
-			tmp = tmp & 0xFF;
+			tmp = tmp & 0x7FFF;
 			sprintf(s, "-%04x", tmp);
                 }
         printf("%s ",s);
@@ -57,7 +58,7 @@ void UI(void){
         printf("InstructionCounter");
 	mt_gotoXY(5,70);
 	tmp = CR;
-        if(((tmp >> 14) & 0x1) == 0)
+        if(((tmp >> 15) & 0x1) == 0)
                 sprintf(s, "+%04x", tmp);
         printf("%s ",s);
 	mt_gotoXY(7, 68);
@@ -91,7 +92,7 @@ void UI(void){
 
 
 	sc_memoryGet(CR, &tmp);
-	if(((tmp >> 14) & 0x1) == 0)
+	if(((tmp >> 15) & 0x1) == 0)
 		sprintf(s, "+%04x", tmp);
         else{
 		tmp = tmp & 0x7FFF;
@@ -111,7 +112,7 @@ int console(void){
 	int flag = 1;
 	int tmp;
 
-	signal(SIGALRM, timer);
+	signal(SIGALRM, CU);
 	//signal(SIGUSR1, reset);	
 
         enum keys key;
@@ -126,7 +127,7 @@ int console(void){
 	mt_gotoXY((CR/10)+2,(CR % 10)*6+2);
 	fflush(stdout);
 	sc_memoryGet(CR, &tmp);
-                        if(((tmp >> 14) & 0x1) == 0){
+                        if(((tmp >> 15) & 0x1) == 0){
                                 sprintf(z, "+%04x", tmp);
 				fflush(stdout);
 			}
@@ -201,9 +202,12 @@ int console(void){
 
                 }
 		case r:{
-			if(CR+1 < 100)
 				alarm(1);
 			break;		
+		}
+		case t:{
+			CU();
+			break;
 		}
 		case DOWN: {
                         if(CR+10 <100)
@@ -231,22 +235,23 @@ int console(void){
                 }
 	
 		default: {
-			rk_mytermrestore();
+			/*rk_mytermrestore();
 			mt_gotoXY(27,1);
-			return -1;
+			return -1;*/
+			break;
 			
 	        }
 	}
+
 	if (key == r)  {
 		pause();
-		CU();
 	}
-	if ((CR+1 == 100) && (key == r)) {
+	/*if ((CR+1 == 100) && (key == r)) {
 		key = 0;
 		alarm(0);
 		//pause();
 		//raise(SIGUSR1);
-	}
+	}*/
 	rk_mytermrestore();
 }
 return 0;

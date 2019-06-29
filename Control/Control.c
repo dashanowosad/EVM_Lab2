@@ -13,20 +13,21 @@ int ALU(int command, int operand) {
 			AC += value;
 			if (AC > 32767 || AC < -32767)
 				return -1;
-			
+			CR++;
 			break;
 		}
 		case SUB:{
 			AC -= value;
 			if (AC > 32767 || AC < -32767)
 				return -1;
+			CR++;
 			break;
 		}
 		case MUL:{
 			AC *= value;
 			if (AC > 32767 || AC < -32767)
 				return -1;
-
+			CR++;
 			break;
 		}
 		case DIVIDE:{
@@ -35,6 +36,7 @@ int ALU(int command, int operand) {
 				return -1;
 			}
 			AC /= value;
+			CR++;
 			break;
 		}
 		default:{
@@ -48,7 +50,7 @@ int ALU(int command, int operand) {
 int CU(){
 	int operand, command, value;
 	sc_memoryGet(CR, &value);
-	if (!sc_commandDecode(value, &command, &operand)) {
+	if (sc_commandDecode(value, &command, &operand)==-1) {
 		sc_regSet(E, 1);
 		return -1;
 	}
@@ -57,8 +59,7 @@ int CU(){
 			return 0;
 		else
 			return -1;
-	}
-	else{
+	}else{
 		switch(command){
 			case READ:{
 			}
@@ -66,29 +67,37 @@ int CU(){
 			}
 			case LOAD:{
 				sc_memoryGet(operand, &value);
-				value &= 0x7FFF;
+				value &= 0x3FFF;
 				AC=value;
+				CR++;
 				break;
 			}
 			case STORE:{
 				sc_memorySet(operand, AC);
+				CR++;
 				break;
 			}
 			case JUMP:{
 				CR=operand;
+				break;
 			}	
 			case JNEG:{
 				if(AC<0)
 					CR=operand;
-
+				break;
 			}
 			case JZ:{
+				break;
 			}
 			case HALT:{
-			alarm(0);
+				alarm(0);
+				break;
+			}
+			default:{
+				break;			
 			}
 		}	
-
+	
 	}
 	return 0;
 }

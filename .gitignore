@@ -6,7 +6,8 @@ Bigchar/*.[aobin]
 MRK/*[ao]
 #Ignoring .exe files
 *.exe
-
+#Temporary ignoring bin in main folder
+*.bin
 
 
 
