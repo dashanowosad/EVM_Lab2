@@ -2,6 +2,7 @@
 #include "Visual/Visual.h"
 #include "Bigchar/Bigchar.h"
 #include "MRK/MyReadKey.h"
+#include "Control/Control.h"
 
 #include <stdio.h>
 #include <signal.h>
@@ -236,7 +237,10 @@ int console(void){
 			
 	        }
 	}
-	if (key == r)  pause();
+	if (key == r)  {
+		pause();
+		CU();
+	}
 	if ((CR+1 == 100) && (key == r)) {
 		key = 0;
 		alarm(0);

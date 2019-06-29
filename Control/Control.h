@@ -5,4 +5,4 @@
 int CU();
 int ALU(int command, int operand);
 
-#define _CPU_
+#endif 

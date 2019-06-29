@@ -7,8 +7,8 @@ CFLAGS=-c -Wall
 
 all: test.exe
 
-test.exe : main.o MSC/msc.a Bigchar/bc.a MRK/mrk.a
-	$(CC) -o test.exe  main.o -L. MSC/msc.a Bigchar/bc.a MRK/mrk.a
+test.exe : main.o Control/Control.o MSC/msc.a Bigchar/bc.a MRK/mrk.a
+	$(CC) -o test.exe  main.o Control/Control.o -L. MSC/msc.a Bigchar/bc.a MRK/mrk.a
 
 MSC/msc.a:  MSC/Command.o MSC/Memory.o MSC/Register.o 
 	ar cr MSC/msc.a MSC/Command.o MSC/Memory.o MSC/Register.o 
@@ -39,6 +39,8 @@ Bigchar/bigchar.o: Bigchar/Bigchar.c
 MRK/myreadkey.o: MRK/MyReadKey.c
 	$(CC) $(CFLAGS) MRK/MyReadKey.c 
 
+Control/Control.o: Control/Control.c
+	$(CC) $(CFLAGS) Control/Control.c -o Control/Control.o
 
 
 
