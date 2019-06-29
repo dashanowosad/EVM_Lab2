@@ -69,7 +69,7 @@ int CU(){
 			}
 			case LOAD:{
 				sc_memoryGet(operand, &value);
-				value &= 0x3FFF;
+				value &= 0x7FFF;
 				AC=value;
 				CR++;
 				break;
@@ -107,7 +107,6 @@ int CU(){
 					AC = ((AC << operand) | (AC >> (31 - operand)) & (~(1 << 31)));
 				else
     				AC = ((AC << operand) | (AC >> (31 - operand)) | (1 << 31));
-					//AC = (AC << operand) | (unsigned()AC) >>  (32 - operand));
 					CR++;
 				break;
 			}
