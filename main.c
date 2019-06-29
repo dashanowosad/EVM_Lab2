@@ -4,10 +4,13 @@
 #include "MRK/MyReadKey.h"
 
 #include <stdio.h>
+#include <signal.h>
+#include <sys/time.h>
 
 
-
-
+void timer(){
+	CR++;
+}
 
 void UI(void){
 	int tmp, i, j, z = 3, y = 2, c = 0;
@@ -106,6 +109,10 @@ int console(void){
 	char z[6];
 	int flag = 1;
 	int tmp;
+
+	signal(SIGALRM, timer);
+	//signal(SIGUSR1, reset);	
+
         enum keys key;
         rk_mytermsave();
 	while(flag){
@@ -131,7 +138,7 @@ int console(void){
 	fflush(stdout);
 	mt_setbgcolor(8);
         fflush(stdout);
-    	rk_readkey(&key);
+    	if (key != r) rk_readkey(&key);
 	switch(key){
 		case F5: {
 			rk_mytermrestore();
@@ -192,6 +199,11 @@ int console(void){
                         break;
 
                 }
+		case r:{
+			if(CR+1 < 100)
+				alarm(1);
+			break;		
+		}
 		case DOWN: {
                         if(CR+10 <100)
 				CR+=10;
@@ -223,10 +235,15 @@ int console(void){
 			return -1;
 			
 	        }
-	 
-
 	}
-        rk_mytermrestore();
+	if (key == r)  pause();
+	if ((CR+1 == 100) && (key == r)) {
+		key = 0;
+		alarm(0);
+		//pause();
+		//raise(SIGUSR1);
+	}
+	rk_mytermrestore();
 }
 return 0;
 
