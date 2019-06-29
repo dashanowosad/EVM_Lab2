@@ -8,6 +8,7 @@ int ALU(int command, int operand) {
 		sc_regSet(M, 1);
 		return -1;
 	}
+	value &= 0x7FFF;
 	switch(command){
 		case ADD:{
 			AC += value;
