@@ -21,7 +21,7 @@ void UI(void){
 			if(((tmp >> 14) & 0x1) == 0)
 				sprintf(s, "+%04x", tmp);
 			else{
-				tmp = tmp & 0xFF;
+				tmp = tmp & 0x7FFF;
 				sprintf(s, "-%04x", tmp);
 			}
 			printf("%s ",s);
@@ -90,7 +90,7 @@ void UI(void){
 	if(((tmp >> 14) & 0x1) == 0)
 		sprintf(s, "+%04x", tmp);
         else{
-		tmp = tmp & 0xFF;
+		tmp = tmp & 0x7FFF;
                 sprintf(s, "-%04x", tmp);
 	}
 	for (i = 0; i < 5; i++){
@@ -123,7 +123,7 @@ int console(void){
 				fflush(stdout);
 			}
                         else{
-                                tmp = tmp & 0xFF;
+                                tmp = tmp & 0x7FFF;
                                 sprintf(z, "-%04x", tmp);
 				fflush(stdout);
 			}
