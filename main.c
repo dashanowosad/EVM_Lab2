@@ -115,7 +115,7 @@ int console(void){
 	signal(SIGALRM, CU);
 	//signal(SIGUSR1, reset);	
 
-        enum keys key;
+        
         rk_mytermsave();
 	while(flag){
 	UI();

@@ -1,4 +1,5 @@
 #include "../MSC/Mysimplecomputer.h"
+#include "Control.h"
 #include "signal.h"
 
 
@@ -92,6 +93,7 @@ int CU(){
 			}
 			case HALT:{
 				alarm(0);
+				key = UP;
 				break;
 			}
 			default:{
@@ -102,3 +104,4 @@ int CU(){
 	}
 	return 0;
 }
+
