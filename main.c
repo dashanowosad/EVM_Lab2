@@ -30,9 +30,11 @@ void printCandO(){
 	printf("              ");
 	mt_gotoXY(8, 68);
 	if(sc_commandDecode(tmp, &command, &operand) == 0){
-		sprintf(op, "%d", command);
-		sprintf(com, "%01x", operand);
-		printf(" %s : %s", op, com);
+		sprintf(com, "%01x", command);
+		printf(" %s :",com);
+		sprintf(op, "%0x", operand);
+		printf(" %s", op);
+		
 	}else
 		printf("+ 00 : 00");
 		
