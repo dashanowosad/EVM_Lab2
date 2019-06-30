@@ -20,7 +20,6 @@ enum {
 	HALT   = 0x43,
 		/*User operations*/
 	JNP    = 0x59,
-	RCL    = 0x62
 };
 
 #endif //_COMMAND_

@@ -8,7 +8,7 @@ int checkCommand(int command) {
 		command == DIVIDE ||	command == MUL    ||
 		command == JUMP   ||	command == JNEG   ||
 		command == JZ     ||	command == HALT   ||
-		command == JNP    ||	command == RCL
+		command == JNP    
 	)
 		return 0;
 	else {

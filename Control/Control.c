@@ -182,14 +182,7 @@ int CU() {
 					CR++;
 				break;
 			}
-			case RCL: {
-				if (AC>>31==0)
-					AC = ((AC << operand) | (AC >> (31 - operand)) & (~(1 << 31)));
-				else
-    				AC = ((AC << operand) | (AC >> (31 - operand)) | (1 << 31));
-					CR++;
-				break;
-			}
+			
 			case HALT: {
 				sc_regSet(T, 0);
 				alarm(0);
