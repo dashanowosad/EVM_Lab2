@@ -14,6 +14,14 @@ void timer(){
 		key = NONE;
 	}
 }
+void reset(void){
+	sc_memoryInit();
+	AC = 0;
+	CR = 0;
+}
+
+
+
 
 void printCandO(){
 	int tmp, operand, command;
@@ -54,7 +62,7 @@ void UI(void){
 	bc_box(1, 1, 12, 61);
 	mt_gotoXY(1, 29);
 	printf("Memory");	
-	bc_box(13, 1, 22, 46);
+	bc_box(13, 1, 23, 46);
 	for(i = 1; i < 11; i += 3)
 		bc_box(i, 62, i+2, 82);
 	mt_gotoXY(1, 67);
@@ -82,8 +90,8 @@ void UI(void){
 	mt_gotoXY(10, 70);
     printf("Flags");
 	mt_gotoXY(11, 68 );
-	printf(" O E V M");			
-	bc_box(13, 47, 22, 82);
+	//printf(" O E V M");			
+	bc_box(13, 47, 23, 82);
 	mt_gotoXY(13, 48);
     printf("Keys:");
 	mt_gotoXY(14, 48);
@@ -97,8 +105,12 @@ void UI(void){
 	mt_gotoXY(18, 48);
 	printf("i  - reset");
 	mt_gotoXY(19, 48);
-	printf("F5 - accumulator");
+	printf("q  - exit");
 	mt_gotoXY(20, 48);
+	printf("w  - set the value");
+	mt_gotoXY(21, 48);
+	printf("F5 - accumulator");
+	mt_gotoXY(22, 48);
 	printf("F6 - instructionCounter");
 	bc_box(24, 1, 26, 48);	
 	mt_gotoXY(24, 19);
@@ -127,6 +139,7 @@ int console(void) {
     rk_mytermsave();
 	while(flag) {
 		UI();
+		CheckFlags();
         rk_mytermregime(0, 1, 1, 0, 0);
 		printf(inv);
 		fflush(stdout);
@@ -199,9 +212,7 @@ int console(void) {
 				break;
 			}
 			case i: {
-				sc_memoryInit();
-				AC = 0;
-				CR = 0;
+				raise(SIGUSR1);
 				break;
 			}
 			case w: {
@@ -222,6 +233,10 @@ int console(void) {
 			}
 			case t: {
 				CU();
+				sc_regSet(T, 0);
+				rk_mytermrestore();
+				CheckFlags();
+				rk_mytermregime(0, 1, 1, 0, 0);
 				break;
 			}
 			case DOWN: {
