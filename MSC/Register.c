@@ -2,7 +2,7 @@
 
 
 int sc_regInit(void) {
-	F_reg = F_reg & 0;
+	F_reg = 0;
 	AC = 0;//kostil
 	CR = 0;//kostil
 	return 0;

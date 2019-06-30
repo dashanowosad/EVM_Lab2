@@ -15,6 +15,22 @@ void timer(){
 	}
 }
 
+void printCandO(){
+	int tmp, operand, command;
+	char com[2], op[2];
+	sc_memoryGet(CR, &tmp);
+	printf("              ");
+	mt_gotoXY(8, 68);
+	if(sc_commandDecode(tmp, &command, &operand) == 0){
+		sprintf(op, "%d", command);
+		sprintf(com, "%01x", operand);
+		printf(" %s : %s", op, com);
+	}else
+		printf("+ 00 : 00");
+		
+}
+
+
 void UI(void){
 	int tmp, i, j, z = 3, y = 2, c = 0;
 	char s[6];
@@ -62,7 +78,7 @@ void UI(void){
 	mt_gotoXY(7, 68);
     printf("Operation");
 	mt_gotoXY(8, 68);
-	printf("+ 00 : 00"); //////////ДОДЕЛАТЬ
+	printCandO(); //////////ДОДЕЛАТЬ
 	mt_gotoXY(10, 70);
     printf("Flags");
 	mt_gotoXY(11, 68 );
@@ -200,6 +216,7 @@ int console(void) {
 				break;
 			}
 			case r: {
+				F_reg = 0;
 				alarm(1);
 				break;		
 			}

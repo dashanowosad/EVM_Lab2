@@ -35,12 +35,11 @@ int sc_commandEncode(int command, int operand, int *value) {
 int sc_commandDecode(int value, int *command, int *operand) {
 	if(value >> 15 == 0) {
 		*(operand) = value & 0x7F;
-		value = value >> 8;
-		*(command) = value & 0x7F;
+//		value = value >> 8;
+		*(command) = (value >> 8) & 0x7F;
 		if (!checkCommand(*command)) {
 			return 0;			
-		}	
-		return -1;
+		}return -1;
 	}
 	return -1;
 }
