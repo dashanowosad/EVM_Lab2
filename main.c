@@ -241,7 +241,7 @@ int console(void) {
 	return 0;
 }
 
-int main(){
+int main() {
 	mt_clrscr();
 	console();
 	return 0;

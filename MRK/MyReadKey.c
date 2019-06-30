@@ -1,19 +1,19 @@
 #include "MyReadKey.h"
 
-int rk_mytermsave(void){
+int rk_mytermsave(void) {
 
 	tcgetattr(0, &tty);
 	savetty = tty;
 	return 0;
 }
 
-int rk_mytermrestore(void){
+int rk_mytermrestore(void) {
 	tcsetattr(0, TCSAFLUSH, &savetty);
 	return 0;
 }
 
-int rk_mytermregime (int regime, int vtime, int vmin, int echo, int sigint){
-	if (((regime < 0) || (regime > 1)) && ((vtime < 0) || (vtime > 1)) && ((vmin < 0) || (vmin > 1)) && ((echo < 0) || (echo > 1)) && ((sigint < 0) || (sigint > 1))){
+int rk_mytermregime (int regime, int vtime, int vmin, int echo, int sigint) {
+	if (((regime < 0) || (regime > 1)) && ((vtime < 0) || (vtime > 1)) && ((vmin < 0) || (vmin > 1)) && ((echo < 0) || (echo > 1)) && ((sigint < 0) || (sigint > 1))) {
 		return -1;
 	}
 	else {
@@ -30,24 +30,24 @@ int rk_mytermregime (int regime, int vtime, int vmin, int echo, int sigint){
 
 		tty.c_cc[VMIN] = vmin;
 		tty.c_cc[VTIME] = vtime;
-		tcsetattr(0,TCSAFLUSH, &tty);
+		tcsetattr(0, TCSAFLUSH, &tty);
 		mt_gotoXY(25,1);
 		return 0;
 	}
 
 }
 
-int rk_readkey (enum keys *key){
+int rk_readkey (enum keys *key) {
 	char buf[5];
 	int b;
 	printf(F_tab);
 	fflush(stdout);
 	b = read(0, &buf, 4);
-	mt_gotoXY(27,1);
+	mt_gotoXY(27, 1);
 	fflush(stdout);
 	if(b == -1) 
 		return -1;
-	else{
+	else {
 		buf[4] = 0;
 
 		if (strncmp(buf, "l", 1) == 0)
@@ -67,7 +67,7 @@ int rk_readkey (enum keys *key){
 		else if (strcmp(buf, "\E[17") == 0)
         	        *key = F6;
 		else if (strncmp(buf, "q", 1) == 0)
-                        *key = q;
+					*key = q;
 		else if (strncmp(buf, "\E[D", 3) == 0)
 	                *key = LEFT;
 		else if (strncmp(buf, "\E[C", 3) == 0)
@@ -79,7 +79,7 @@ int rk_readkey (enum keys *key){
 		else if (strcmp(buf, "\n") == 0)
         	        *key = ENTER;
 		else
-        	        *key = NONE;
+			*key = NONE;
 		return 0;
 	}	
 }

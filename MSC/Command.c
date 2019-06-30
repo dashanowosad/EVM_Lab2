@@ -14,10 +14,10 @@ int checkCommand(int command) {
 	else {
 		sc_regSet(E, 1);
 		return -1;
-        }
+	}
 }
 
-int sc_commandEncode(int command, int operand, int *value){
+int sc_commandEncode(int command, int operand, int *value) {
 	if(operand < 128) {
 		if (!checkCommand(command)) {
 		*(value) = *(value) & 0x0;
