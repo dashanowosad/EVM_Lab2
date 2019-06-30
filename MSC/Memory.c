@@ -34,7 +34,7 @@ int sc_memoryGet(int adress, int *value) {
 int sc_memorySave(char *filename) {
     char f[100] = "Files//";
     strcat(f,filename);
-    FILE *file = fopen(f, "rb");
+    FILE *file = fopen(f, "wb");
 	if (file) {
 		fwrite(mass, sizeof(int), N, file);
 		fclose(file);
