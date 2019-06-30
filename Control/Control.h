@@ -4,6 +4,7 @@
 
 int CU();
 int ALU(int command, int operand);
+void CheckFlags(void);
 
 enum keys key;
 #endif 
