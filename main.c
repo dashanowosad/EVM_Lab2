@@ -214,6 +214,7 @@ int console(void) {
 				break;
 			}
 			case i: {
+				//	РАЗОБРАТЬСЯ
 				raise(SIGUSR1);
 				break;
 			}

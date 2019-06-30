@@ -43,6 +43,7 @@ int ALU(int command, int operand) {
 	int value;
 	if (sc_memoryGet(operand, &value) == -1) {
 		sc_regSet(M, 1);
+		CheckFlags();
 		return -1;
 	}
 	value &= 0x7FFF;
@@ -50,7 +51,9 @@ int ALU(int command, int operand) {
 		case ADD: {
 			AC += value;
 			if (AC > 32767 || AC < -32767) {
-				sc_regSet(P, F_reg);
+				sc_regSet(P, 1);
+				sc_regSet(T, 0);
+				CheckFlags();
 				return -1;
 			}
 			CR++;
@@ -59,7 +62,9 @@ int ALU(int command, int operand) {
 		case SUB: {
 			AC -= value;
 			if (AC > 32767 || AC < -32767) {
-				sc_regSet(P, F_reg);
+				sc_regSet(P, 1);
+				sc_regSet(T, 0);
+				CheckFlags();
 				return -1;
 			}
 			CR++;
@@ -68,7 +73,9 @@ int ALU(int command, int operand) {
 		case MUL: {
 			AC *= value;
 			if (AC > 32767 || AC < -32767) {
-				sc_regSet(P, F_reg);
+				sc_regSet(P, 1);
+				sc_regSet(T, 0);
+				CheckFlags();
 				return -1;
 			}
 			CR++;
@@ -77,6 +84,8 @@ int ALU(int command, int operand) {
 		case DIVIDE: {
 			if (value == 0)	{
 				sc_regSet(DEL, 1);
+				sc_regSet(T, 0);
+				CheckFlags();
 				return -1;
 			}
 			AC /= value;
@@ -149,12 +158,14 @@ int CU() {
 				break;
 			}
 			case JUMP: {
-				CR=operand;
+				CR = operand;
 				break;
 			}	
 			case JNEG: {
 				if(AC < 0)
 					CR = operand;
+				else
+					CR++;
 				break;
 			}
 			case JZ: {

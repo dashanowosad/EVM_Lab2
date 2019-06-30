@@ -32,7 +32,9 @@ int sc_memoryGet(int adress, int *value) {
 }
 
 int sc_memorySave(char *filename) {
-    FILE *file = fopen(filename, "wb");
+    char f[100] = "Files//";
+    strcat(f,filename);
+    FILE *file = fopen(f, "rb");
 	if (file) {
 		fwrite(mass, sizeof(int), N, file);
 		fclose(file);
@@ -42,7 +44,9 @@ int sc_memorySave(char *filename) {
 }
 
 int sc_memoryLoad(char *filename) {
-	FILE *file = fopen(filename, "rb");
+    char f[100] = "Files//";
+    strcat(f,filename);
+    FILE *file = fopen(f, "rb");
 	if (file) {
 		fread(mass, sizeof(int), N, file);
 		fclose(file);
