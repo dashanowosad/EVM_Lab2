@@ -138,6 +138,7 @@ int console(void) {
 	int flag = 1;
 	int tmp;
 	signal(SIGALRM, timer);
+	signal(SIGUSR1, reset);
     rk_mytermsave();
 	while(flag) {
 		UI();
