@@ -10,6 +10,7 @@ int END_function(int adress);
 int INPUT_function(int adress);
 int PRINT_function(int index);
 int GOTO_function(int index);
+int LET_function(int index);
 
 char A[100];
 int Adress[1000];

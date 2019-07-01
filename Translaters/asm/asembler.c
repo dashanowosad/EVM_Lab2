@@ -23,8 +23,8 @@ int CheckComand(char *S){
 
 int main(){
 	FILE *f1, *f2;
-	f1 = fopen("factorial.txt","r");
-	f2 = fopen("factorial.bin", "wb");
+	f1 = fopen("as.txt","r");
+	f2 = fopen("1.bin", "wb");
 	int A[100], adr,com, op, i, res;
 	char adress[3], command[10], operand[3], result[10];
 	char space; //для пробела

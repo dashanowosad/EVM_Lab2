@@ -7,7 +7,7 @@ int CheckComand(char *S, int index){
 	else if(strcmp(S, "PRINT") == 0) adr = PRINT_function(index);
 	else if(strcmp(S, "GOTO") == 0) adr = GOTO_function(index);
 	else if(strcmp(S, "IF") == 0) adr = IF_function(index);
-	else if(strcmp(S, "LET") == 0);
+	else if(strcmp(S, "LET") == 0) adr = LET_function(index);
 	else if(strcmp(S, "END") == 0) adr = END_function(index);
 	return adr;
 }
@@ -44,14 +44,17 @@ int PRINT_function(int index){
 	for(j = 0; j < 100; j++){
 		if (symbol == A[j]) break;	
 	}
+	//printf("%d %d",j, index);
 	if ((index < 10) && (j < 10))
 		fprintf(f2,"0%d WRITE 0%d\n",index, j);
-	else if ((index > 10) && (j < 10))
+	else if ((index >= 10) && (j < 10))
 		fprintf(f2,"%d WRITE 0%d\n",index, j);
-	else if ((index < 10) && (j > 10))
+	else if ((index < 10) && (j >= 10))
 		fprintf(f2,"0%d WRITE %d\n",index, j);
-	else if ((index > 10) && (j > 10))
+	else if ((index >= 10) && (j >= 10)){
 		fprintf(f2,"%d WRITE %d\n",index, j);
+		//printf("fjehfuohefu");	
+	}
 	else 
 		return -1;
 	return ++index;
@@ -68,11 +71,11 @@ int GOTO_function(int index){
 		if(Adress[j] == adr) break;
 	if ((index < 10) && (j < 10))
 		fprintf(f2,"0%d JUMP 0%d\n",index, j);
-	else if ((index > 10) && (j < 10))
+	else if ((index >= 10) && (j < 10))
 		fprintf(f2,"%d JUMP 0%d\n",index, j);
-	else if ((index < 10) && (j > 10))
+	else if ((index < 10) && (j >= 10))
 		fprintf(f2,"0%d JUMP %d\n",index, j);
-	else if ((index > 10) && (j > 10))
+	else if ((index >= 10) && (j >= 10))
 		fprintf(f2,"%d JUMP %d\n",index, j);
 	else 
 		return -1;
@@ -118,11 +121,11 @@ int IF_function(int index){
 	}
 	if ((index < 10) && (j < 10))
 		fprintf(f2,"0%d LOAD 0%d\n",index, j);
-	else if ((index > 10) && (j < 10))
+	else if ((index >= 10) && (j < 10))
 		fprintf(f2,"%d LOAD 0%d\n",index, j);
-	else if ((index < 10) && (j > 10))
+	else if ((index < 10) && (j >= 10))
 		fprintf(f2,"0%d LOAD %d\n",index, j);
-	else if ((index > 10) && (j > 10))
+	else if ((index >= 10) && (j >= 10))
 		fprintf(f2,"%d LOAD %d\n",index, j);
 	else 
 		return -1;
@@ -135,15 +138,16 @@ int IF_function(int index){
 		adr++;
 		for(j = 99; j >= 0; j--) //ищем свободную ячейку
 			if (A[j] == '0') break;	
+		A[j] = 1;
 		Member[j] = num;
 		//printf("%d %d", j, num);
 		if ((index < 10) && (j < 10))
 			fprintf(f2,"0%d SUB 0%d\n",index, j);
-		else if ((index > 10) && (j < 10))
+		else if ((index >= 10) && (j < 10))
 			fprintf(f2,"%d SUB 0%d\n",index, j);
-		else if ((index < 10) && (j > 10))
+		else if ((index < 10) && (j >= 10))
 			fprintf(f2,"0%d SUB %d\n",index, j);
-		else if ((index > 10) && (j > 10))
+		else if ((index >= 10) && (j >= 10))
 			fprintf(f2,"%d SUB %d\n",index, j);
 		else 
 			return -1;
@@ -154,11 +158,11 @@ int IF_function(int index){
 	if (sign == '='){
 		if ((index < 10) && (adr < 10))
 			fprintf(f2,"0%d JZ 0%d\n",index, adr);
-		else if ((index > 10) && (adr < 10))
+		else if ((index >= 10) && (adr < 10))
 			fprintf(f2,"%d JZ 0%d\n",index, adr);
-		else if ((index < 10) && (adr > 10))
+		else if ((index < 10) && (adr >= 10))
 			fprintf(f2,"0%d JZ %d\n",index, adr);
-		else if ((index > 10) && (adr > 10))
+		else if ((index >= 10) && (adr >= 10))
 			fprintf(f2,"%d JZ %d\n",index, adr);
 		else 
 			return -1;
@@ -166,23 +170,24 @@ int IF_function(int index){
 	else if (sign == '>'){
 		if ((index < 10) && (adr < 10))
 			fprintf(f2,"0%d JUMP 0%d\n",index, adr);
-		else if ((index > 10) && (adr < 10))
+		else if ((index >= 10) && (adr < 10))
 			fprintf(f2,"%d JUMP 0%d\n",index, adr);
-		else if ((index < 10) && (adr > 10))
+		else if ((index < 10) && (adr >= 10))
 			fprintf(f2,"0%d JUMP %d\n",index, adr);
-		else if ((index > 10) && (adr > 10))
+		else if ((index >= 10) && (adr >= 10))
 			fprintf(f2,"%d JUMP %d\n",index, adr);
 		else 
 			return -1;
 	}
 	else if (sign == '<'){
+		adr+=3;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if ((index < 10) && (adr < 10))
 			fprintf(f2,"0%d JNEG 0%d\n",index, adr);
-		else if ((index > 10) && (adr < 10))
+		else if ((index >= 10) && (adr < 10))
 			fprintf(f2,"%d JNEG 0%d\n",index, adr);
-		else if ((index < 10) && (adr > 10))
+		else if ((index < 10) && (adr >= 10))
 			fprintf(f2,"0%d JNEG %d\n",index, adr);
-		else if ((index > 10) && (adr > 10))
+		else if ((index >= 10) && (adr >= 10))
 			fprintf(f2,"%d JNEG %d\n",index, adr);
 		else 
 			return -1;
@@ -193,6 +198,141 @@ int IF_function(int index){
 	
 	
 }
+
+int LET_function(int index){
+	char symbol1, symbol2, sign, space, rav;
+	int num, j;
+	
+	fscanf(f1,"%c", &space);
+	fscanf(f1,"%c", &symbol1);
+	fscanf(f1,"%c", &space);
+	fscanf(f1,"%c", &rav);
+	fscanf(f1,"%c", &space);
+	fscanf(f1,"%c", &symbol2);
+	////////
+	//printf("%d\n",index);
+	if(symbol1 != symbol2){
+		num = (int)symbol2 -'0';
+		for(j = 99; j >= 0; j--)
+			if (A[j] == symbol1) break;	
+		if (j == -1) {
+			for(j = 99; j >= 0; j--)
+				if (A[j] == '0') break;	
+			A[j] = symbol1;
+		}
+		//printf("%d",j);
+		Member[j] = num;
+	}
+	else{
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &sign);
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &symbol2);
+
+		num = (int)symbol2 -'0';
+					
+		for(j = 0; j < 100; j++){//нашли, где храним символ
+			if (symbol1 == A[j]) break;	
+		}
+		if ((index < 10) && (j < 10))
+			fprintf(f2,"0%d LOAD 0%d\n",index, j);
+		else if ((index >= 10) && (j < 10))
+			fprintf(f2,"%d LOAD 0%d\n",index, j);
+		else if ((index < 10) && (j >=10))
+			fprintf(f2,"0%d LOAD %d\n",index, j);
+		else if ((index >= 10) && (j >= 10))
+			fprintf(f2,"%d LOAD %d\n",index, j);
+		else 
+			return -1;		
+		
+		index++;
+		if (num < 10){
+			for(j = 99; j >= 0; j--)//нашли свободное место
+				if (A[j] == '0') break;
+			A[j] = symbol2;
+			Member[j] = num;
+		}
+		else{
+			for(j = 0; j < 100; j++)//нашли, где храним символ
+				if (symbol2 == A[j]) break;		
+		}
+			if (sign == '*'){
+				
+				if ((index < 10) && (j < 10))
+					fprintf(f2,"0%d MUL 0%d\n",index, j);
+				else if ((index >= 10) && (j < 10))
+					fprintf(f2,"%d MUL 0%d\n",index, j);
+				else if ((index < 10) && (j >= 10))
+					fprintf(f2,"0%d MUL %d\n",index, j);
+				else if ((index >= 10) && (j >= 10))
+					fprintf(f2,"%d MUL %d\n",index, j);
+				else 
+					return -1;	
+				index++;	
+			}
+			else if (sign == '+'){
+		
+				if ((index < 10) && (j < 10))
+					fprintf(f2,"0%d ADD 0%d\n",index, j);
+				else if ((index >= 10) && (j < 10))
+					fprintf(f2,"%d ADD 0%d\n",index, j);
+				else if ((index < 10) && (j >= 10))
+					fprintf(f2,"0%d ADD %d\n",index, j);
+				else if ((index >= 10) && (j >= 10))
+					fprintf(f2,"%d ADD %d\n",index, j);
+				else 
+					return -1;		
+				index++;
+			}
+			else if (sign == '-'){
+	
+				if ((index < 10) && (j < 10))
+					fprintf(f2,"0%d SUB 0%d\n",index, j);
+				else if ((index >= 10) && (j < 10))
+					fprintf(f2,"%d SUB 0%d\n",index, j);
+				else if ((index < 10) && (j >= 10))
+					fprintf(f2,"0%d SUB %d\n",index, j);
+				else if ((index >= 10) && (j >= 10))
+					fprintf(f2,"%d SUB %d\n",index, j);
+				else 
+					return -1;	
+				index++;	
+			}
+			else if (sign == '/'){
+		
+				if ((index < 10) && (j < 10))
+					fprintf(f2,"0%d DIVIDE 0%d\n",index, j);
+				else if ((index >= 10) && (j < 10))
+					fprintf(f2,"%d DIVIDE 0%d\n",index, j);
+				else if ((index < 10) && (j >= 10))
+					fprintf(f2,"0%d DIVIDE %d\n",index, j);
+				else if ((index >= 10) && (j >= 10))
+					fprintf(f2,"%d DIVIDE %d\n",index, j);
+				else 
+					return -1;	
+				index++;	
+			}
+
+			for(j = 0; j < 100; j++)//нашли, где храним символ
+				if (symbol1 == A[j]) break;	
+			
+			if ((index < 10) && (j < 10))
+				fprintf(f2,"0%d STORE 0%d\n",index, j);
+			else if ((index >= 10) && (j < 10))
+				fprintf(f2,"%d STORE 0%d\n",index, j);
+			else if ((index < 10) && (j >= 10))
+				fprintf(f2,"0%d STORE %d\n",index, j);
+			else if ((index >= 10) && (j >= 10))
+				fprintf(f2,"%d STORE %d\n",index, j);
+			else 
+				return -1;
+			index++;
+		
+	}
+	return index;
+	//////// 
+}
+
 int main(){
 	char adress[3], space, command[7], res[4];
 	int i = 0, j;
@@ -210,7 +350,7 @@ int main(){
 		fscanf(f1,"%s", &command);
 		if(feof(f1)) break;
 		Adress[i] = atof(adress);
-		//printf("%d\n",Adress[i]);
+		//printf("%s\n",adress);
 		i = CheckComand(command, i);
 			
 			
@@ -220,20 +360,20 @@ int main(){
 		if (Member[j] != 0){
 			if (j < 10) 
 				fprintf(f2,"0%d = ", j);
-			else if (j > 10)
+			else if (j >= 10)
 				fprintf(f2,"%d = ", j);
 			else
 				return -1;		
 			
 			sprintf(res, "%0x", Member[j]);
 			if (Member[j] < 16)
-				fprintf(f2,"+000%s ", res);
+				fprintf(f2,"+000%s\n", res);
 			else if ((Member[j] > 15) && (Member[j] < 256))
-				fprintf(f2,"+00%s ", res);
+				fprintf(f2,"+00%s\n", res);
 			else if ((Member[j] > 255) && (Member[j] < 4096))
-				fprintf(f2,"+0%s ", res);
+				fprintf(f2,"+0%s\n", res);
 			else if (Member[j] > 4095)
-				fprintf(f2,"+%s ", res);
+				fprintf(f2,"+%s\n", res);
 			else 
 				return -1;
 			//printf("%d", Member[j]);
