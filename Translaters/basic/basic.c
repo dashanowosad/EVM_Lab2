@@ -33,14 +33,29 @@ int INPUT_function(int index){
 		fprintf(f2,"%d READ %d\n",index, new_adr);
 	else 
 		return -1;
-	//printf("%d\n",adress);
 	return ++index;
 	
 }
-/*int PRINT_function(int index){
+int PRINT_function(int index){
 	char symbol, space;
-	
-}*/
+	int j;
+	fscanf(f1,"%c", &space);
+	fscanf(f1,"%c", &symbol);
+	for(j = 0; j < 100; j++){
+		if (symbol == A[j]) break;	
+	}
+	if ((index < 9) && (j < 9))
+		fprintf(f2,"0%d WRITE 0%d\n",index, j);
+	else if ((index > 9) && (j < 9))
+		fprintf(f2,"%d WRITE 0%d\n",index, j);
+	else if ((index < 9) && (j > 9))
+		fprintf(f2,"0%d WRITE %d\n",index, j);
+	else if ((index > 9) && (j > 9))
+		fprintf(f2,"%d WRITE %d\n",index, j);
+	else 
+		return -1;
+	return ++index;
+}
 int main(){
 	char adress[3], space, command[7];
 	int i = 0;
