@@ -4,7 +4,7 @@ Visual/*.o
 Bigchar/*.[aobin]
 *.o
 MRK/*[ao]
-Translaters/ *.[obin]
+Translaters/ *.[obin] sat sbt
 #Ignoring .exe files
 *.exe
 #Temporary ignoring bin in main folder
