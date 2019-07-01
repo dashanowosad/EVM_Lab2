@@ -5,8 +5,8 @@ int CheckComand(char *S, int index){
 	if(strcmp(S, "REM") == 0);
 	else if(strcmp(S, "INPUT") == 0) adr = INPUT_function(index);
 	else if(strcmp(S, "PRINT") == 0) adr = PRINT_function(index);
-	else if(strcmp(S, "GOTO") == 0);
-	else if(strcmp(S, "IF") == 0);
+	else if(strcmp(S, "GOTO") == 0) adr = GOTO_function(index);
+	else if(strcmp(S, "IF") == 0);// adr = IF_function(index);
 	else if(strcmp(S, "LET") == 0);
 	else if(strcmp(S, "END") == 0) adr = END_function(index);
 	return adr;
@@ -56,6 +56,29 @@ int PRINT_function(int index){
 		return -1;
 	return ++index;
 }
+
+int GOTO_function(int index){
+	char adress[2],space;
+	int j, adr;	
+	fscanf(f1,"%c", &space);
+	fscanf(f1,"%s",adress);
+	adr = atof(adress);
+	//printf("%s",adress);
+	for (j = 0; j < 1000; j++)
+		if(Adress[j] == adr) break;
+	if ((index < 9) && (j < 9))
+		fprintf(f2,"0%d JUMP 0%d\n",index, j);
+	else if ((index > 9) && (j < 9))
+		fprintf(f2,"%d JUMP 0%d\n",index, j);
+	else if ((index < 9) && (j > 9))
+		fprintf(f2,"0%d JUMP %d\n",index, j);
+	else if ((index > 9) && (j > 9))
+		fprintf(f2,"%d JUMP %d\n",index, j);
+	else 
+		return -1;
+	return ++index;
+	
+}
 int main(){
 	char adress[3], space, command[7];
 	int i = 0;
@@ -64,10 +87,12 @@ int main(){
 
 	while(!feof(f1)){
 		fscanf(f1,"%s", &adress); // считали адрес
-		fscanf(f1,"%s",&command);
+		fscanf(f1,"%s", &command);
 		if(feof(f1)) break;
+		Adress[i] = atof(adress);
+		printf("%s\n",command);
 		i = CheckComand(command, i);
-		printf("%s %d\n",adress,i);	
+			
 			
 	}
 	
