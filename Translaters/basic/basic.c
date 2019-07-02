@@ -239,7 +239,8 @@ int LET_function(int index){
 	fscanf(f1,"%c", &symbol2);
 	////////
 	//printf("%d\n",index);
-	if(symbol1 != symbol2){
+	if((symbol1 != symbol2) && (symbol2 != '(')){
+				
 		num = (int)symbol2 -'0';
 		for(j = 99; j >= 0; j--)
 			if (A[j] == symbol1) break;	
@@ -251,7 +252,20 @@ int LET_function(int index){
 		//printf("%d",j);
 		Member[j] = num;
 	}
-	else{
+	else if ((symbol1 != symbol2) && ( symbol2 == '(')){
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &symbol1);
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &sign);
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &symbol2);
+		fscanf(f1,"%c", &space);
+		fscanf(f1,"%c", &rav);
+		if (rav == ')')
+			index = LET_function(index);
+			
+	}
+	else if (symbol1 == symbol2) {
 		fscanf(f1,"%c", &space);
 		fscanf(f1,"%c", &sign);
 		fscanf(f1,"%c", &space);
