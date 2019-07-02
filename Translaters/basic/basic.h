@@ -15,5 +15,6 @@ int LET_function(int index);
 char A[100];
 int Adress[1000];
 int Member[100];
+int Jump[100];
 FILE *f1, *f2;
 #endif

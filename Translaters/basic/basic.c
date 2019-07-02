@@ -66,19 +66,40 @@ int GOTO_function(int index){
 	fscanf(f1,"%c", &space);
 	fscanf(f1,"%s",adress);
 	adr = atof(adress);
+	
 	//printf("%s",adress);
 	for (j = 0; j < 1000; j++)
 		if(Adress[j] == adr) break;
-	if ((index < 10) && (j < 10))
-		fprintf(f2,"0%d JUMP 0%d\n",index, j);
-	else if ((index >= 10) && (j < 10))
-		fprintf(f2,"%d JUMP 0%d\n",index, j);
-	else if ((index < 10) && (j >= 10))
-		fprintf(f2,"0%d JUMP %d\n",index, j);
-	else if ((index >= 10) && (j >= 10))
-		fprintf(f2,"%d JUMP %d\n",index, j);
-	else 
-		return -1;
+	if (j != 1000){	
+		if ((index < 10) && (j < 10))
+			fprintf(f2,"0%d JUMP 0%d\n",index, j);
+		else if ((index >= 10) && (j < 10))
+			fprintf(f2,"%d JUMP 0%d\n",index, j);
+		else if ((index < 10) && (j >= 10))
+			fprintf(f2,"0%d JUMP %d\n",index, j);
+		else if ((index >= 10) && (j >= 10))
+			fprintf(f2,"%d JUMP %d\n",index, j);
+		else 
+			return -1;
+	}
+	else{
+		for (j = 99; j >= 0; j--)
+			if(A[j] == '0') break;
+		A[j] = '1';
+		//printf("%c",A[j]);
+
+		if ((index < 10) && (j < 10))
+			fprintf(f2,"0%d JUMP 0%d\n",index, j);
+		else if ((index >= 10) && (j < 10))
+			fprintf(f2,"%d JUMP 0%d\n",index, j);
+		else if ((index < 10) && (j >= 10))
+			fprintf(f2,"0%d JUMP %d\n",index, j);
+		else if ((index >= 10) && (j >= 10))
+			fprintf(f2,"%d JUMP %d\n",index, j);
+		else 
+			return -1;
+		Jump[j] = adr;
+	}
 	return ++index;
 	
 }
@@ -111,11 +132,18 @@ int IF_function(int index){
 		if(Adress[j] == adr) break;
 		//else printf("%d",Adress[j]);	
 	}	
-	adr = j;
+	if (j == 1000){
+		for (j = 99; j >= 0; j--)
+			if(A[j] == '0') break;
+		A[j] = '1';
+		Jump[j] = adr;
+		adr = j;
+	}
+	/*adr = j;
 	if (adr == 1000){ //скачок вперед
 		adr = atof(adress);
 		adr/=10;	
-	}
+	}*/
 	for(j = 0; j < 100; j++){//нашли, где храним символ
 		if (symbol == A[j]) break;	
 	}
@@ -135,7 +163,7 @@ int IF_function(int index){
 	num = atof(number);
 	//printf("%d",num);
 	if (num != 0){
-		adr++;
+		//adr++;
 		for(j = 99; j >= 0; j--) //ищем свободную ячейку
 			if (A[j] == '0') break;	
 		A[j] = 1;
@@ -180,7 +208,7 @@ int IF_function(int index){
 			return -1;
 	}
 	else if (sign == '<'){
-		adr+=3;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//adr+=3;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if ((index < 10) && (adr < 10))
 			fprintf(f2,"0%d JNEG 0%d\n",index, adr);
 		else if ((index >= 10) && (adr < 10))
@@ -355,6 +383,27 @@ int main(){
 			
 			
 	}
+
+
+	for (j = 0; j < 100; j++){
+		for (i = 0; i < 100; i++){
+			if ((Adress[i] == Jump[j]) && (Adress[i] != 0) && (Jump[j] != 0)) {
+				if ((j < 10) && (i < 10))
+					fprintf(f2,"0%d JUMP 0%d\n",j, i);
+				else if ((j >= 10) && (i < 10))
+					fprintf(f2,"%d JUMP 0%d\n",j, i);
+				else if ((j < 10) && (i >= 10))
+					fprintf(f2,"0%d JUMP %d\n",j, i);
+				else if ((j >= 10) && (i >= 10))
+					fprintf(f2,"%d JUMP %d\n",j, i);
+				else 
+					return -1;	
+			}		
+		}	
+	}
+			
+
+
 	
 	for (j = 0; j < 100; j++){
 		if (Member[j] != 0){
