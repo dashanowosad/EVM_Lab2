@@ -19,6 +19,22 @@ void reset(void){
 	AC = 0;
 	CR = 0;
 }
+int check(int command) {
+	if(
+		command == READ   ||	command == WRITE  ||
+		command == LOAD   ||	command == STORE  ||
+		command == ADD    ||	command == SUB    ||
+		command == DIVIDE ||	command == MUL    ||
+		command == JUMP   ||	command == JNEG   ||
+		command == JZ     ||	command == HALT   ||
+		command == JNP    
+	)
+		return 0;
+	else 
+		return -1;
+}
+
+
 
 
 
@@ -49,7 +65,7 @@ void UI(void){
 	for(i = 0; i < 10; i++){
 		for(j = 0; j < 10; j++){
 			sc_memoryGet(c, &tmp);
-			if(((tmp >> 15) & 0x1) == 0)
+			if(check(tmp >> 8) == 0)
 				sprintf(s, "+%04x", tmp);
 			else{
 				tmp = tmp & 0x7FFF;
@@ -71,7 +87,7 @@ void UI(void){
 	printf("Accumulator");
 	mt_gotoXY(2, 70);
 	tmp = AC;
-        if(((tmp >> 15) & 0x1) == 0)
+        if(check(tmp >> 8) == 0)
 			sprintf(s, "+%04x", tmp);
 		else {
 			tmp = tmp & 0x7FFF;
@@ -82,8 +98,7 @@ void UI(void){
 	printf("InstructionCounter");
 	mt_gotoXY(5, 70);
 	tmp = CR;
-	if(((tmp >> 15) & 0x1) == 0)
-		sprintf(s, "+%04x", tmp);
+	sprintf(s, "+%04x", tmp);
     printf("%s ", s);
 	mt_gotoXY(7, 68);
     printf("Operation");
@@ -118,7 +133,7 @@ void UI(void){
 	mt_gotoXY(24, 19);
     printf("Input/Output");	
 	sc_memoryGet(CR, &tmp);
-	if(((tmp >> 15) & 0x1) == 0)
+	if(check(tmp >> 8) == 0)
 		sprintf(s, "+%04x", tmp);
     else {
 		tmp &= 0x7FFF;
@@ -151,7 +166,7 @@ int console(void) {
 		mt_gotoXY((CR / 10) + 2, (CR % 10) * 6 + 2);
 		fflush(stdout);
 		sc_memoryGet(CR, &tmp);
-		if(((tmp >> 15) & 0x1) == 0) {
+		if(check(tmp >> 8) == 0) {
 			sprintf(z, "+%04x", tmp);
 			fflush(stdout);
 		} else {
